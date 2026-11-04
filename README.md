@@ -53,6 +53,7 @@ Fonte: JetBrains Mono. O `restaurar.ps1` baixa e instala só para o usuário atu
 ## Opcional
 
 - **`icone/icone-cinza.ps1`:** troca o ícone azul do VS Code por um cinza (gerado a partir do ícone instalado) nos atalhos do menu Iniciar, da área de trabalho e da barra de tarefas (o da barra de título fica cinza pelo `cursor-like.css`); `-Remover` volta ao azul. Depois de atualizar o VS Code, rodar de novo se o ícone voltar ao azul.
+- **`opcional/copiar-arroba/`:** `Ctrl+C` num arquivo do explorador também copia `@caminho` para colar no chat do Claude Code; liga e desliga pelo botão `@` no rodapé. Instalar como no `README.md` dela.
 - **`opcional/php-sem-tag/`:** extensão local que colore como PHP arquivos sem `<?php` (eventos do Scriptcase, por exemplo). Não entra no `restaurar.ps1`; instalar e associar por projeto, como no `README.md` dela.
 
 ## Restaurar

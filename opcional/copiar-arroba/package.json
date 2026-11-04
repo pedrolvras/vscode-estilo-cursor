@@ -1,0 +1,35 @@
+{
+  "name": "copiar-arroba",
+  "displayName": "Copiar com @",
+  "description": "Ctrl+C num arquivo do explorador também copia @caminho para colar no chat do Claude Code.",
+  "version": "1.0.0",
+  "publisher": "local",
+  "engines": { "vscode": "^1.60.0" },
+  "categories": ["Other"],
+  "main": "./extension.js",
+  "activationEvents": ["onStartupFinished"],
+  "contributes": {
+    "configuration": {
+      "title": "Copiar com @",
+      "properties": {
+        "copiarArroba.ativo": {
+          "type": "boolean",
+          "default": true,
+          "description": "Ctrl+C no explorador também põe @caminho na área de transferência."
+        }
+      }
+    },
+    "commands": [
+      { "command": "copiarArroba.alternar", "title": "Copiar com @: ligar/desligar" },
+      { "command": "copiarArroba.copiar", "title": "Copiar com @: copiar arquivo(s)" }
+    ],
+    "keybindings": [
+      {
+        "command": "copiarArroba.copiar",
+        "key": "ctrl+c",
+        "mac": "cmd+c",
+        "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !inputFocus"
+      }
+    ]
+  }
+}
