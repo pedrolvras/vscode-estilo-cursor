@@ -1,8 +1,8 @@
 {
     "name": "copiar-arroba",
     "displayName": "Copiar com @",
-    "description": "Ctrl+C num arquivo do explorador copia @caminho; Ctrl+V no chat do Claude Code vira menção.",
-    "version": "1.3.0",
+    "description": "Ctrl+C num arquivo do explorador também copia @caminho para colar no chat do Claude Code.",
+    "version": "1.4.0",
     "publisher": "local",
     "engines": {
         "vscode": "^1.60.0"
@@ -33,10 +33,6 @@
             {
                 "command": "copiarArroba.copiar",
                 "title": "Copiar com @: copiar arquivo(s)"
-            },
-            {
-                "command": "copiarArroba.colar",
-                "title": "Copiar com @: colar no chat como menção"
             }
         ],
         "keybindings": [
@@ -45,12 +41,6 @@
                 "key": "ctrl+c",
                 "mac": "cmd+c",
                 "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !inputFocus"
-            },
-            {
-                "command": "copiarArroba.colar",
-                "key": "ctrl+v",
-                "mac": "cmd+v",
-                "when": "config.copiarArroba.ativo && ((activeWebviewPanelId == 'claudeVSCodePanel' && !editorTextFocus && !terminalFocus && !inputFocus && !panelFocus && !sideBarFocus && !auxiliaryBarFocus) || focusedView == 'claudeVSCodeSidebarSecondary' || focusedView == 'claudeVSCodeSidebar')"
             }
         ]
     }
