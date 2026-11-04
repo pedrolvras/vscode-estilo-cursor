@@ -44,11 +44,16 @@ Lista em `extensoes-necessarias.txt`; o `restaurar.ps1` instala sozinho.
 | `be5invis.vscode-custom-css` | Custom CSS and JS Loader: carrega o `cursor-like.css` |
 | `anthropic.claude-code` | Claude Code (o chat) |
 | `cedricverlinden.cursor-dark` | Tema de cores `cursor-less-dark` |
-| `miguelsolorio.symbols` | Tema de ícones discreto "Symbols" |
+| `chadalen.vscode-jetbrains-icon-theme` | Tema de ícones dos arquivos no estilo JetBrains (2023 dark) |
 
 `extensoes-todas.txt` tem, além dessas, as outras extensões que uso (contador de uso do Claude e visualizador de PDF).
 
 Fonte: JetBrains Mono. O `restaurar.ps1` baixa e instala só para o usuário atual (sem administrador). Se não conseguir (sem internet, proxy), avisa; sem ela, o editor usa a Cascadia Code do Windows.
+
+## Opcional
+
+- **`icone/icone-cinza.ps1`:** troca o ícone azul do VS Code por um cinza (gerado a partir do ícone instalado) nos atalhos do menu Iniciar, da área de trabalho e da barra de tarefas; `-Remover` volta ao azul. Depois de atualizar o VS Code, rodar de novo se o ícone voltar ao azul.
+- **`opcional/php-sem-tag/`:** extensão local que colore como PHP arquivos sem `<?php` (eventos do Scriptcase, por exemplo). Não entra no `restaurar.ps1`; instalar e associar por projeto, como no `README.md` dela.
 
 ## Restaurar
 

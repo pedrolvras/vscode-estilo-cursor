@@ -1,6 +1,6 @@
 anthropic.claude-code
 be5invis.vscode-custom-css
 cedricverlinden.cursor-dark
+chadalen.vscode-jetbrains-icon-theme
 growthjack.claude-code-usage
-miguelsolorio.symbols
 tomoki1207.pdf

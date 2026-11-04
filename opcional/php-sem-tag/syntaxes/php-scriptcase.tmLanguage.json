@@ -1,0 +1,5 @@
+{
+  "name": "PHP Scriptcase",
+  "scopeName": "source.php-scriptcase",
+  "patterns": [ { "include": "source.php" } ]
+}

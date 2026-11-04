@@ -222,3 +222,8 @@
   border-radius: 8px !important;
   overflow: hidden;
 }
+
+/* Cursor desliza ao digitar, mas rápido o bastante para acompanhar as letras (padrão do VS Code: 80ms) */
+.monaco-editor .cursors-layer.cursor-smooth-caret-animation > .cursor {
+  transition-duration: 30ms !important;
+}

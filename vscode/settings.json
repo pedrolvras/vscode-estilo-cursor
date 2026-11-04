@@ -1,5 +1,5 @@
 {
-    "claudeCode.preferredLocation": "sidebar",
+    "claudeCode.preferredLocation": "panel",
     "explorer.fileNesting.patterns": {
         "*.ts": "${capture}.js",
         "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
@@ -65,6 +65,9 @@
     "editor.smoothScrolling": true,
     "editor.renderLineHighlight": "all",
     "editor.guides.bracketPairs": "active",
+    "editor.bracketPairColorization.enabled": false,
+    "editor.minimap.maxColumn": 60,
+    "editor.minimap.renderCharacters": false,
     "terminal.integrated.fontSize": 13,
     "window.menuBarVisibility": "classic",
     "workbench.colorCustomizations": {
@@ -92,7 +95,7 @@
     "vscode_custom_css.imports": [
         "file:///C:/Users/pedro.assumpcao/.vscode/cursor-like.css"
     ],
-    "workbench.iconTheme": "symbols",
+    "workbench.iconTheme": "vscode-jetbrains-icon-theme-2023-dark",
 
     // Fonte: usa a primeira que estiver instalada (JetBrains Mono > Geist Mono > Cascadia Code, que já vem no Windows)
     "editor.fontFamily": "'JetBrains Mono', 'Geist Mono', 'Cascadia Code', Consolas, monospace",

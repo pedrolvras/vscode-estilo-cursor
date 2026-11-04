@@ -1,0 +1,26 @@
+{
+  "name": "scriptcase-php",
+  "displayName": "PHP Scriptcase",
+  "description": "Colore como PHP os eventos do Scriptcase, que não começam com <?php.",
+  "version": "1.0.0",
+  "publisher": "local",
+  "engines": { "vscode": "^1.60.0" },
+  "categories": ["Programming Languages"],
+  "contributes": {
+    "languages": [
+      {
+        "id": "php-scriptcase",
+        "aliases": ["PHP Scriptcase"],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "php-scriptcase",
+        "scopeName": "source.php-scriptcase",
+        "path": "./syntaxes/php-scriptcase.tmLanguage.json",
+        "embeddedLanguages": { "source.php": "php", "source.sql": "sql" }
+      }
+    ]
+  }
+}
