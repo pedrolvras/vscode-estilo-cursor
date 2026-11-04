@@ -227,3 +227,8 @@
 .monaco-editor .cursors-layer.cursor-smooth-caret-animation > .cursor {
   transition-duration: 30ms !important;
 }
+
+/* Ícone da barra de título em cinza (combina com o ícone cinza dos atalhos) */
+.monaco-workbench .part.titlebar .window-appicon {
+  filter: grayscale(1) brightness(1.5) !important;
+}
