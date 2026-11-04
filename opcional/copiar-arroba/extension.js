@@ -1,8 +1,9 @@
-// Ctrl+C no explorador: copia o arquivo como sempre e, se ligado:
-// - põe "@caminho/relativo" na área de transferência (um por arquivo, separados por espaço; entre aspas
-//   quando o caminho tem espaço), para colar em qualquer lugar;
-// - manda a menção direto para o chat do Claude Code (em azul, como escolhida pelo @), pelo comando
-//   "Insert @-Mention Reference" (Alt+K) do Claude Code.
+// Copiar com @
+// - Ctrl+C no explorador: copia o arquivo como sempre e, se ligado, põe "@caminho/relativo" na área de
+//   transferência (um por arquivo, separados por espaço; entre aspas quando o caminho tem espaço).
+// - Ctrl+V no chat do Claude Code: se a área de transferência tem só menções (@caminho), cada uma entra
+//   no chat em azul, pelo comando "Insert @-Mention Reference" (Alt+K) do Claude Code; qualquer outra
+//   coisa (texto, imagem) cola normalmente.
 const vscode = require('vscode');
 
 function ativo() {
@@ -12,17 +13,17 @@ function ativo() {
 function atualizar(item) {
   if (ativo()) {
     item.text = '@';
-    item.tooltip = 'Copiar com @: ligado (Ctrl+C no explorador menciona o arquivo no chat). Clique para desligar.';
+    item.tooltip = 'Copiar com @: ligado (Ctrl+C no explorador copia @caminho; Ctrl+V no chat vira menção). Clique para desligar.';
     item.color = undefined;
   } else {
     item.text = '$(circle-slash) @';
-    item.tooltip = 'Copiar com @: desligado (Ctrl+C copia só o arquivo). Clique para ligar.';
+    item.tooltip = 'Copiar com @: desligado (Ctrl+C e Ctrl+V normais). Clique para ligar.';
     item.color = new vscode.ThemeColor('disabledForeground');
   }
 }
 
-// caminho relativo do copyRelativeFilePath -> Uri de arquivo (com várias pastas abertas, o caminho
-// pode vir com o nome da pasta na frente); pasta ou inexistente -> null
+// caminho relativo -> Uri de arquivo (com várias pastas abertas, o caminho pode vir com o nome da
+// pasta na frente); pasta ou inexistente -> null
 async function acharUri(rel) {
   const pastas = vscode.workspace.workspaceFolders || [];
   for (const pasta of pastas) {
@@ -37,6 +38,30 @@ async function acharUri(rel) {
     }
   }
   return null;
+}
+
+// "@a @\"b c\"" -> ['a', 'b c']; texto que não é só menções -> null
+function lerMencoes(texto) {
+  const t = String(texto || '').trim();
+  if (t === '' || !/^(@"[^"]+"|@[^\s"]+)(\s+(@"[^"]+"|@[^\s"]+))*$/.test(t)) { return null; }
+  const re = /@"([^"]+)"|@([^\s"]+)/g;
+  const lista = [];
+  let m;
+  while ((m = re.exec(t)) !== null) { lista.push(m[1] !== undefined ? m[1] : m[2]); }
+  return lista;
+}
+
+function abaAberta(uri) {
+  for (const grupo of vscode.window.tabGroups.all) {
+    for (const aba of grupo.tabs) {
+      if (aba.input && aba.input.uri && aba.input.uri.toString() === uri.toString()) { return aba; }
+    }
+  }
+  return null;
+}
+
+async function colarNormal() {
+  await vscode.commands.executeCommand('editor.action.clipboardPasteAction');
 }
 
 function activate(context) {
@@ -64,33 +89,43 @@ function activate(context) {
     await vscode.commands.executeCommand('copyRelativeFilePath');
     const texto = await vscode.env.clipboard.readText();
     await vscode.commands.executeCommand('filesExplorer.copy');
-    const caminhos = texto.split(/\r?\n/)
+    const mencoes = texto.split(/\r?\n/)
       .map(function (p) { return p.trim().split(String.fromCharCode(92)).join('/'); })
-      .filter(function (p) { return p !== ''; });
-    if (!caminhos.length) { return; }
-    const mencoes = caminhos.map(function (p) { return /\s/.test(p) ? '@"' + p + '"' : '@' + p; });
-    await vscode.env.clipboard.writeText(mencoes.join(' ') + ' ');
+      .filter(function (p) { return p !== ''; })
+      .map(function (p) { return /\s/.test(p) ? '@"' + p + '"' : '@' + p; });
+    if (mencoes.length) {
+      await vscode.env.clipboard.writeText(mencoes.join(' ') + ' ');
+      vscode.window.setStatusBarMessage('Copiado: ' + mencoes.join(' '), 2500);
+    }
+  }));
 
-    // O comando do Claude Code usa o arquivo aberto no editor: abre cada um (sem seleção, para
-    // mencionar o arquivo inteiro), manda a menção e volta ao editor de antes.
-    const anterior = vscode.window.activeTextEditor;
-    let azuis = 0;
+  context.subscriptions.push(vscode.commands.registerCommand('copiarArroba.colar', async function () {
+    const texto = await vscode.env.clipboard.readText();
+    const caminhos = ativo() ? lerMencoes(texto) : null;
+    if (!caminhos) { await colarNormal(); return; }
+    const uris = [];
     for (const rel of caminhos) {
       const uri = await acharUri(rel);
-      if (!uri) { continue; }
-      try {
+      if (!uri) { await colarNormal(); return; }
+      uris.push(uri);
+    }
+    // O comando do Claude Code usa o arquivo aberto no editor: abre cada um (sem seleção, para
+    // mencionar o arquivo inteiro), manda a menção e fecha a aba se ela não estava aberta antes.
+    try {
+      for (const uri of uris) {
+        const jaAberta = abaAberta(uri) !== null;
         const doc = await vscode.workspace.openTextDocument(uri);
         await vscode.window.showTextDocument(doc, { preview: true, preserveFocus: false, selection: new vscode.Range(0, 0, 0, 0) });
         await vscode.commands.executeCommand('claude-vscode.insertAtMention');
-        azuis++;
-      } catch (e) {
-        // imagem, binário ou Claude Code ausente: fica só o texto copiado
+        if (!jaAberta) {
+          const aba = abaAberta(uri);
+          if (aba) { await vscode.window.tabGroups.close(aba, true); }
+        }
       }
+    } catch (e) {
+      // imagem, binário ou Claude Code ausente: cola o texto
+      await colarNormal();
     }
-    if (anterior && azuis > 0) {
-      await vscode.window.showTextDocument(anterior.document, { viewColumn: anterior.viewColumn, preserveFocus: true, selection: anterior.selection });
-    }
-    vscode.window.setStatusBarMessage((azuis > 0 ? 'Mencionado no chat: ' : 'Copiado: ') + mencoes.join(' '), 2500);
   }));
 }
 
