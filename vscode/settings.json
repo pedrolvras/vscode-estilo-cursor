@@ -104,5 +104,6 @@
     // Explorador: só a cor no nome do arquivo alterado, sem as letras M/U
     "explorer.decorations.badges": false,
     "workbench.activityBar.location": "top",
-    "editor.minimap.renderCharacters": false
+    "editor.minimap.renderCharacters": false,
+    "copiarArroba.ativo": true
 }
