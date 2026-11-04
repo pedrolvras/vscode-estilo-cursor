@@ -70,7 +70,7 @@
     "editor.lineNumbersMinChars": 3,
     "editor.minimap.maxColumn": 60,
     "terminal.integrated.fontSize": 13,
-    "window.menuBarVisibility": "classic",
+    "window.menuBarVisibility": "compact",
     "workbench.colorCustomizations": {
         "menu.background": "#1f1f1f",
         "menu.foreground": "#cccccc",
