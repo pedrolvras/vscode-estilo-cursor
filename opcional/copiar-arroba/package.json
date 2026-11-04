@@ -2,7 +2,7 @@
   "name": "copiar-arroba",
   "displayName": "Copiar com @",
   "description": "Ctrl+C num arquivo do explorador também copia @caminho para colar no chat do Claude Code.",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "publisher": "local",
   "engines": { "vscode": "^1.60.0" },
   "categories": ["Other"],
