@@ -1,0 +1,215 @@
+{
+  "model": "opus",
+  "env": {
+    "DISABLE_TELEMETRY": "1",
+    "DISABLE_ERROR_REPORTING": "1"
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "C:/Users/pedro.assumpcao/.orca/agent-hooks/orca-agent-hook.exe claude",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "C:/Users/pedro.assumpcao/.orca/agent-hooks/orca-agent-hook.exe claude",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "C:/Users/pedro.assumpcao/.orca/agent-hooks/orca-agent-hook.exe claude",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "StopFailure": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "C:/Users/pedro.assumpcao/.orca/agent-hooks/orca-agent-hook.exe claude",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "C:/Users/pedro.assumpcao/.orca/agent-hooks/orca-agent-hook.exe claude",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "C:/Users/pedro.assumpcao/.orca/agent-hooks/orca-agent-hook.exe claude",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "TeammateIdle": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "C:/Users/pedro.assumpcao/.orca/agent-hooks/orca-agent-hook.exe claude",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "C:/Users/pedro.assumpcao/.orca/agent-hooks/orca-agent-hook.exe claude",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "C:/Users/pedro.assumpcao/.orca/agent-hooks/orca-agent-hook.exe claude",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "C:/Users/pedro.assumpcao/.orca/agent-hooks/orca-agent-hook.exe claude",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "C:/Users/pedro.assumpcao/.orca/agent-hooks/orca-agent-hook.exe claude",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "C:/Users/pedro.assumpcao/.orca/agent-hooks/orca-agent-hook.exe claude",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Elicitation": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "C:/Users/pedro.assumpcao/.orca/agent-hooks/orca-agent-hook.exe claude",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "ElicitationResult": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "C:/Users/pedro.assumpcao/.orca/agent-hooks/orca-agent-hook.exe claude",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "C:/Users/pedro.assumpcao/.orca/agent-hooks/orca-agent-hook.exe claude",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "C:/Users/pedro.assumpcao/.orca/agent-hooks/claude-statusline.cmd"
+  },
+  "enabledPlugins": {
+    "habblaud@habblaud": true,
+    "habblaud-permissoes@habblaud": true,
+    "habblaud-mensagens@habblaud": true,
+    "Notion@claude-code-notion-plugin": false,
+    "productivity@knowledge-work-plugins": false,
+    "data@knowledge-work-plugins": false,
+    "design@knowledge-work-plugins": false,
+    "marketing@knowledge-work-plugins": false,
+    "pdf-viewer@knowledge-work-plugins": false
+  },
+  "extraKnownMarketplaces": {
+    "habblaud": {
+      "source": {
+        "source": "directory",
+        "path": "C:\\Users\\pedro.assumpcao\\habblaud-mod"
+      }
+    }
+  },
+  "effortLevel": "high",
+  "modelSettings": {
+    "claude-sonnet-5-5": {
+      "effortLevel": "high"
+    },
+    "claude-opus-5-5": {
+      "effortLevel": "medium"
+    }
+  },
+  "theme": "dark",
+  "agentPushNotifEnabled": true,
+  "skipDangerousModePermissionPrompt": true
+}

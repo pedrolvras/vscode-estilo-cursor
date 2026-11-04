@@ -1,0 +1,39 @@
+[
+    {
+        "key": "shift+enter",
+        "command": "workbench.action.terminal.sendSequence",
+        "args": {
+            "text": "\u001b\r"
+        },
+        "when": "terminalFocus"
+    },
+
+    // Atalhos parecidos com os do Cursor, ligados ao Claude Code
+    // Ctrl+L: abre o chat e põe o cursor na caixa de digitar
+    {
+        "key": "ctrl+l",
+        "command": "claude-vscode.focus",
+        "when": "!editorHasSelection || !editorTextFocus"
+    },
+    // Ctrl+L com texto selecionado no editor: manda a seleção para o chat e foca a caixa
+    {
+        "key": "ctrl+l",
+        "command": "runCommands",
+        "args": {
+            "commands": ["claude-vscode.insertAtMention", "claude-vscode.focus"]
+        },
+        "when": "editorTextFocus && editorHasSelection"
+    },
+    // Ctrl+I no editor: manda a seleção (ou o arquivo) para o chat, sem sair do editor
+    {
+        "key": "ctrl+i",
+        "command": "claude-vscode.insertAtMention",
+        "when": "editorTextFocus"
+    },
+    // Tira o Ctrl+L padrão do VS Code (selecionar a linha), que conflitaria
+    {
+        "key": "ctrl+l",
+        "command": "-expandLineSelection",
+        "when": "textInputFocus"
+    }
+]

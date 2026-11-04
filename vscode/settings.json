@@ -1,0 +1,105 @@
+{
+    "claudeCode.preferredLocation": "sidebar",
+    "explorer.fileNesting.patterns": {
+        "*.ts": "${capture}.js",
+        "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
+        "*.jsx": "${capture}.js",
+        "*.tsx": "${capture}.ts",
+        "tsconfig.json": "tsconfig.*.json",
+        "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb, bun.lock",
+        "*.sqlite": "${capture}.${extname}-*",
+        "*.db": "${capture}.${extname}-*",
+        "*.sqlite3": "${capture}.${extname}-*",
+        "*.db3": "${capture}.${extname}-*",
+        "*.sdb": "${capture}.${extname}-*",
+        "*.s3db": "${capture}.${extname}-*"
+    },
+    "mssql.connectionGroups": [
+        {
+            "name": "ROOT",
+            "id": "ROOT"
+        }
+    ],
+    "explorer.confirmDelete": false,
+    "terminal.integrated.mouseWheelScrollSensitivity": 3,
+    "terminal.integrated.gpuAcceleration": "off",
+    "claudeCode.hideOnboarding": true,
+    "chat.disableAIFeatures": true,
+
+    // Sem telemetria e sem coleta de dados (o mais perto do VSCodium que dá por configuração)
+    "telemetry.telemetryLevel": "off",
+    "telemetry.feedback.enabled": false,
+    "workbench.enableExperiments": false,
+    "workbench.settings.enableNaturalLanguageSearch": false,
+    "workbench.cloudChanges.autoResume": "off",
+    "workbench.cloudChanges.continueOn": "off",
+    "npm.fetchOnlinePackageInfo": false,
+    "extensions.ignoreRecommendations": true,
+    "redhat.telemetry.enabled": false,
+    "python.experiments.enabled": false,
+    "mssql.enableTelemetry": false,
+
+    // Atualizações só quando você pedir (assim o Custom CSS e o CSS do chat não somem de surpresa)
+    "update.mode": "manual",
+    "extensions.autoUpdate": "off",
+    "extensions.autoCheckUpdates": false,
+
+    // Salva sozinho ao trocar de arquivo ou de janela
+    "files.autoSave": "onFocusChange",
+    "workbench.colorTheme": "cursor-less-dark",
+    "workbench.sideBar.location": "left",
+    "workbench.secondarySideBar.defaultVisibility": "visible",
+    "workbench.secondarySideBar.showLabels": true,
+    "workbench.layoutControl.enabled": true,
+    "workbench.layoutControl.type": "toggles",
+    "window.commandCenter": true,
+    "window.titleBarStyle": "custom",
+    "workbench.editor.tabActionLocation": "right",
+    "workbench.tree.indent": 12,
+    "workbench.tree.renderIndentGuides": "onHover",
+    "workbench.startupEditor": "none",
+    "editor.fontSize": 13,
+    "editor.lineHeight": 1.6,
+    "editor.cursorBlinking": "smooth",
+    "editor.cursorSmoothCaretAnimation": "on",
+    "editor.smoothScrolling": true,
+    "editor.renderLineHighlight": "all",
+    "editor.guides.bracketPairs": "active",
+    "terminal.integrated.fontSize": 13,
+    "window.menuBarVisibility": "classic",
+    "workbench.colorCustomizations": {
+        "menu.background": "#1f1f1f",
+        "menu.foreground": "#cccccc",
+        "menu.selectionBackground": "#2c2c2c",
+        "menu.selectionForeground": "#ffffff",
+        "menu.separatorBackground": "#2b2b2b",
+        "menu.border": "#2f2f2f",
+        "menubar.selectionBackground": "#2c2c2c"
+    },
+    "window.density.editorTabHeight": "default",
+    "workbench.editor.empty.hint": "hidden",
+    "workbench.list.smoothScrolling": true,
+    "workbench.tips.enabled": false,
+    "editor.scrollbar.verticalScrollbarSize": 8,
+    "editor.scrollbar.horizontalScrollbarSize": 8,
+    "editor.overviewRulerBorder": false,
+    "editor.hideCursorInOverviewRuler": true,
+    "editor.padding.top": 8,
+    "terminal.integrated.cursorStyle": "line",
+    "terminal.integrated.cursorBlinking": true,
+
+    // Custom CSS and JS Loader: cantos, respiro, abas em pílula (arquivo em C:\Users\pedro.assumpcao\.vscode\cursor-like.css)
+    "vscode_custom_css.imports": [
+        "file:///C:/Users/pedro.assumpcao/.vscode/cursor-like.css"
+    ],
+    "workbench.iconTheme": "symbols",
+
+    // Fonte: usa a primeira que estiver instalada (JetBrains Mono > Geist Mono > Cascadia Code, que já vem no Windows)
+    "editor.fontFamily": "'JetBrains Mono', 'Geist Mono', 'Cascadia Code', Consolas, monospace",
+    "editor.fontLigatures": false,
+    "terminal.integrated.fontFamily": "'JetBrains Mono', 'Geist Mono', 'Cascadia Mono', Consolas, monospace",
+
+    // Explorador: só a cor no nome do arquivo alterado, sem as letras M/U
+    "explorer.decorations.badges": false,
+    "workbench.activityBar.location": "top"
+}

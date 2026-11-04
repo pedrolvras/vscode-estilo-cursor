@@ -1,0 +1,224 @@
+/* Visual parecido com o do Cursor (carregado pelo Custom CSS and JS Loader).
+   Para desligar: "Disable Custom CSS and JS" na paleta de comandos e reiniciar. */
+
+:root {
+  --cl-linha: #2b2b2b;    /* cor da linha fina entre os painéis */
+}
+
+/* Divisórias: uma linha fina cinza entre os painéis, sem respiro */
+.monaco-workbench .part.sidebar.left {
+  border-right: 1px solid var(--cl-linha) !important;
+}
+.monaco-workbench .part.sidebar.right,
+.monaco-workbench .part.auxiliarybar {
+  border-left: 1px solid var(--cl-linha) !important;
+}
+.monaco-workbench .part.panel.bottom {
+  border-top: 1px solid var(--cl-linha) !important;
+}
+.monaco-split-view2.separator-border > .monaco-scrollable-element > .split-view-container > .split-view-view:not(:first-child)::before {
+  background-color: var(--cl-linha) !important;
+}
+.monaco-workbench .part.editor > .content .editor-group-container > .title,
+.monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container {
+  border-bottom: none !important;
+}
+.monaco-workbench .part.editor > .content .editor-group-container > .title::after {
+  display: none !important;
+}
+
+/* Abas planas, como no Cursor: sem bordas, inativas transparentes e com texto mais apagado */
+.monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab {
+  border: none !important;
+}
+.monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab .tab-border-top-container,
+.monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab .tab-border-bottom-container {
+  display: none !important;
+}
+.monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab:not(.active) {
+  background-color: transparent !important;
+  opacity: 0.7;
+}
+.monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab:not(.active):hover {
+  background-color: rgba(255, 255, 255, 0.04) !important;
+  opacity: 1;
+}
+
+/* Caixa de busca do topo (command center) arredondada */
+.monaco-workbench .part.titlebar .command-center .action-item.command-center-center {
+  border-radius: 8px !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Barra de título e barra de status com a mesma linha fina */
+.monaco-workbench .part.titlebar {
+  border-bottom: 1px solid var(--cl-linha) !important;
+}
+.monaco-workbench .part.statusbar {
+  border-top: 1px solid var(--cl-linha) !important;
+}
+
+/* Menus suspensos (File, Edit... e botão direito): cantos arredondados e sombra suave.
+   As cores vêm de workbench.colorCustomizations (menu.*) no settings.json */
+/* O menu em si fica numa área isolada (shadow DOM); por isso o arredondamento vai na caixa de fora */
+.monaco-workbench .menubar .menubar-menu-items-holder,
+.monaco-workbench > .context-view,
+.monaco-workbench .context-view.monaco-component {
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45) !important;
+}
+.monaco-workbench .menubar .menubar-menu-button {
+  border-radius: 5px !important;
+}
+
+/* ===== Tela de configurações (Ctrl+,) no estilo do "Cursor Settings" ===== */
+
+/* Caixa de busca arredondada */
+.settings-editor > .settings-header > .search-container > .suggest-input-container,
+.settings-editor > .settings-header .settings-header-controls,
+.settings-editor .monaco-inputbox {
+  border-radius: 8px !important;
+}
+
+/* Menu da esquerda: itens com destaque arredondado, sem a barra azul */
+.settings-editor .settings-toc-container .monaco-list-row {
+  border-radius: 6px !important;
+}
+.settings-editor .settings-toc-container .monaco-list-row.selected,
+.settings-editor .settings-toc-container .monaco-list-row.focused {
+  background-color: rgba(255, 255, 255, 0.07) !important;
+  outline: none !important;
+}
+
+/* Cada configuração vira um cartão: fundo um pouco mais claro e cantos arredondados.
+   A borda transparente dá o espaço entre os cartões sem quebrar o cálculo de altura da lista. */
+.settings-editor .settings-tree-container .monaco-list-row,
+.settings-editor .settings-tree-container .monaco-list-row.focused,
+.settings-editor .settings-tree-container .monaco-list-row:hover {
+  background-color: transparent !important;
+  outline: none !important;
+}
+.settings-editor .settings-tree-container .setting-item-contents {
+  background-color: #1f1f1f;
+  background-clip: padding-box;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-radius: 12px;
+}
+.settings-editor .settings-tree-container .monaco-list-row:hover .setting-item-contents {
+  background-color: #232323;
+}
+.settings-editor .settings-tree-container .monaco-list-row.focused .setting-item-contents {
+  background-color: #262626;
+}
+.settings-editor .settings-tree-container .setting-item-contents .setting-item-modified-indicator {
+  display: none !important;
+}
+
+/* Campos de texto e listas dentro do cartão */
+.settings-editor .settings-tree-container .setting-item-contents .monaco-inputbox,
+.settings-editor .settings-tree-container .setting-item-contents .monaco-select-box {
+  border-radius: 6px !important;
+}
+
+/* Caixas de marcar viram chaves liga/desliga, como no Cursor */
+.settings-editor .setting-item-bool .setting-value-checkbox {
+  position: relative !important;
+  width: 30px !important;
+  height: 16px !important;
+  min-width: 30px !important;
+  border-radius: 999px !important;
+  border: none !important;
+  background-color: #3a3a3a !important;
+  transition: background-color 0.15s ease;
+}
+.settings-editor .setting-item-bool .setting-value-checkbox::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 2px;
+  left: 2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #e6e6e6;
+  visibility: visible !important;
+  opacity: 1 !important;
+  transition: left 0.15s ease;
+}
+.settings-editor .setting-item-bool .setting-value-checkbox.checked {
+  background-color: #4a8af4 !important;
+}
+.settings-editor .setting-item-bool .setting-value-checkbox.checked::before {
+  left: 16px;
+  background-color: #ffffff;
+}
+
+/* ===== Canto direito da barra de título como no Cursor: painel, chat e engrenagem ===== */
+
+/* Esconde o botão da barra lateral esquerda, o de personalizar layout e o de contas */
+.monaco-workbench .part.titlebar .action-item:has(.codicon-layout-sidebar-left),
+.monaco-workbench .part.titlebar .action-item:has(.codicon-layout-sidebar-left-off),
+.monaco-workbench .part.titlebar .action-item:has(.codicon-layout),
+.monaco-workbench .part.titlebar .action-item:has(.codicon-account) {
+  display: none !important;
+}
+
+/* O botão da barra da direita (onde fica o Claude) vira um balão de chat */
+.monaco-workbench .part.titlebar .codicon-layout-sidebar-right::before,
+.monaco-workbench .part.titlebar .codicon-layout-sidebar-right-off::before {
+  content: "\ea6b" !important; /* codicon "comment" */
+}
+
+/* Ícones um pouco mais apagados, como no Cursor */
+.monaco-workbench .part.titlebar .layout-dropdown-container .action-label,
+.monaco-workbench .part.titlebar .global-actions-container .action-label,
+.monaco-workbench .part.titlebar .titlebar-right .action-label {
+  opacity: 0.75;
+}
+.monaco-workbench .part.titlebar .titlebar-right .action-label:hover {
+  opacity: 1;
+}
+
+/* ===== Ícones da barra de atividades no topo da lateral: maiores, como no Cursor ===== */
+.monaco-workbench .pane-composite-part > .header-or-footer .composite-bar .action-item,
+.monaco-workbench .pane-composite-part > .title .composite-bar .action-item {
+  /* A seta do VS Code não leva esse espaço em conta (usa um tamanho fixo por ícone),
+     então fica só um espaço pequeno entre eles. */
+  margin: 0 2px !important;
+}
+.monaco-workbench .pane-composite-part > .header-or-footer .composite-bar .action-item .action-label,
+.monaco-workbench .pane-composite-part > .title .composite-bar .action-item .action-label {
+  width: 30px !important;
+  height: 30px !important;
+  border-radius: 6px !important;
+}
+/* Ícones nativos (explorador, busca, git, extensões...) */
+.monaco-workbench .pane-composite-part > .header-or-footer .composite-bar .action-item .action-label.codicon,
+.monaco-workbench .pane-composite-part > .title .composite-bar .action-item .action-label.codicon,
+.monaco-workbench .pane-composite-part > .header-or-footer .composite-bar .action-item .action-label.codicon::before,
+.monaco-workbench .pane-composite-part > .title .composite-bar .action-item .action-label.codicon::before {
+  font-size: 19px !important;
+}
+/* Ícones de extensões (desenhados por máscara) */
+.monaco-workbench .pane-composite-part > .header-or-footer .composite-bar .action-item .action-label.uri-icon,
+.monaco-workbench .pane-composite-part > .title .composite-bar .action-item .action-label.uri-icon {
+  -webkit-mask-size: 19px !important;
+  mask-size: 19px !important;
+}
+/* Item ativo: fundo arredondado em vez da linha embaixo */
+.monaco-workbench .pane-composite-part .composite-bar .action-item.checked .action-label {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+}
+.monaco-workbench .pane-composite-part .composite-bar .action-item .active-item-indicator {
+  display: none !important;
+}
+
+/* Widgets flutuantes (busca, sugestões, paleta) com cantos arredondados */
+.monaco-workbench .quick-input-widget,
+.monaco-editor .suggest-widget,
+.monaco-editor .find-widget,
+.monaco-hover {
+  border-radius: 8px !important;
+  overflow: hidden;
+}

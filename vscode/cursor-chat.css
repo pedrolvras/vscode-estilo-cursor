@@ -1,0 +1,99 @@
+/* Chat do Claude Code com visual parecido com o do Cursor. So aparencia.
+   Aplicado no webview/index.css da extensao por aplicar-chat-css.ps1.
+   Os seletores usam [class*="nome_"] para sobreviver a troca do sufixo entre versoes. */
+
+:root, html {
+  --cc-linha: #2b2b2b;
+  --cc-raio: 8px;
+}
+
+/* Conversa: um pouco menos de margem lateral */
+[class*="messagesContainer_"] {
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+}
+
+/* Sem a linha do tempo (bolinhas e traco vertical) a esquerda das respostas */
+[class*="timelineMessage_"] {
+  padding-left: 0 !important;
+}
+[class*="timelineMessage_"]::before,
+[class*="timelineMessage_"]::after {
+  display: none !important;
+}
+
+/* Sua mensagem: cartao com a largura toda, borda fina e cantos arredondados */
+[class*="userMessageContainer_"] {
+  display: block !important;
+  width: 100% !important;
+}
+[class^="userMessage_"],
+[class*=" userMessage_"] {
+  display: block !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  border: 1px solid var(--cc-linha) !important;
+  border-radius: var(--cc-raio) !important;
+  padding: 10px 12px !important;
+}
+
+/* Caixa de digitar no estilo do Cursor: fundo um pouco mais claro, borda fina, sem sombra
+   e sem o anel laranja no foco */
+[class*="inputContainer_"] {
+  border-radius: 12px !important;
+  box-shadow: none !important;
+}
+[class*="inputContainer_"]:not([class*="inputContainer_07S1Yg"]) {
+  background: #1f1f1f !important;
+  border: 1px solid #2f2f2f !important;
+}
+[class*="inputContainer_"]:focus-within {
+  border-color: #3a3a3a !important;
+  box-shadow: none !important;
+}
+
+/* Rodape da caixa: sem a linha divisoria, mais respiro */
+[class^="inputFooter_"],
+[class*=" inputFooter_"] {
+  border-top: none !important;
+  padding: 4px 8px 8px !important;
+  gap: 4px !important;
+}
+
+/* Botoes do rodape (modo, modelo...) como pilulas, igual ao "Agent" do Cursor */
+[class*="inputFooter"] [class^="footerButton_"]:not([class*="footerButtonPrimary_"]):not([class*="footerButtonStatic_"]),
+[class*="inputFooter"] [class*=" footerButton_"]:not([class*="footerButtonPrimary_"]):not([class*="footerButtonStatic_"]),
+[class*="modelPill_"] {
+  border-radius: 999px !important;
+  background-color: rgba(255, 255, 255, 0.06) !important;
+  padding-left: 4px !important;
+  padding-right: 10px !important;
+}
+[class*="inputFooter"] [class^="footerButton_"]:hover,
+[class*="inputFooter"] [class*=" footerButton_"]:hover,
+[class*="modelPill_"]:hover {
+  background-color: rgba(255, 255, 255, 0.10) !important;
+}
+
+/* Botoes redondos a direita (menu, uso, enviar), como o do microfone no Cursor */
+[class*="inputFooter"] [class*="menuButton_"],
+[class*="inputFooter"] [class*="usageButtonV2_"],
+[class*="sendButton_"] {
+  border-radius: 50% !important;
+}
+/* Enviar: cinza claro no modo normal. Nos modos plan/auto/acceptEdits mantem a cor do modo */
+[class*="sendButton_"]:not([data-permission-mode]),
+[class*="sendButton_"][data-permission-mode="default"] {
+  background-color: #e6e6e6 !important;
+  color: #1a1a1a !important;
+}
+
+/* Blocos de codigo e de diff: cantos arredondados e borda suave */
+[class*="codeBlockWrapper_"] pre {
+  border: 1px solid var(--cc-linha) !important;
+  border-radius: 6px !important;
+}
+[class*="diffEditorContainer_"] {
+  border: 1px solid var(--cc-linha) !important;
+  border-radius: 6px !important;
+}
