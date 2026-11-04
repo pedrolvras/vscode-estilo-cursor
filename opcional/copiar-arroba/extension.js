@@ -1,5 +1,5 @@
 // Ctrl+C no explorador: copia o arquivo como sempre e, se ligado, põe "@caminho/relativo" na área de
-// transferência (um por arquivo, separados por espaço), para colar no chat do Claude Code.
+// transferência (um por arquivo, separados por espaço; entre aspas quando o caminho tem espaço), para colar no chat do Claude Code.
 const vscode = require('vscode');
 
 function ativo() {
@@ -46,7 +46,7 @@ function activate(context) {
     const mencoes = texto.split(/\r?\n/)
       .map(function (p) { return p.trim().split(String.fromCharCode(92)).join('/'); })
       .filter(function (p) { return p !== ''; })
-      .map(function (p) { return '@' + p; });
+      .map(function (p) { return /\s/.test(p) ? '@"' + p + '"' : '@' + p; });
     if (mencoes.length) {
       await vscode.env.clipboard.writeText(mencoes.join(' ') + ' ');
       vscode.window.setStatusBarMessage('Copiado: ' + mencoes.join(' '), 2500);
