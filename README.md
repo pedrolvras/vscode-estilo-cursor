@@ -24,7 +24,7 @@ Lista em `extensoes-necessarias.txt`; o `restaurar.ps1` instala sozinho.
 | `cedricverlinden.cursor-dark` | Tema de cores `cursor-less-dark` |
 | `miguelsolorio.symbols` | Tema de ícones discreto "Symbols" |
 
-`extensoes-todas.txt` tem todas as extensões instaladas hoje (SQL Server, Python, SQLite etc.), para quem quiser o mesmo ambiente completo.
+`extensoes-todas.txt` tem, além dessas, as outras extensões que uso (contador de uso do Claude, visualizador de PDF, Material Icon Theme).
 
 Fonte: JetBrains Mono. O `restaurar.ps1` baixa e instala só para o usuário atual (sem administrador). Se não conseguir (sem internet, proxy), avisa; sem ela, o editor usa a Cascadia Code do Windows.
 
