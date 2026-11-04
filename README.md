@@ -24,7 +24,7 @@ Lista em `extensoes-necessarias.txt`; o `restaurar.ps1` instala sozinho.
 | `cedricverlinden.cursor-dark` | Tema de cores `cursor-less-dark` |
 | `miguelsolorio.symbols` | Tema de ícones discreto "Symbols" |
 
-`extensoes-todas.txt` tem, além dessas, as outras extensões que uso (contador de uso do Claude, visualizador de PDF, Material Icon Theme).
+`extensoes-todas.txt` tem, além dessas, as outras extensões que uso (contador de uso do Claude e visualizador de PDF).
 
 Fonte: JetBrains Mono. O `restaurar.ps1` baixa e instala só para o usuário atual (sem administrador). Se não conseguir (sem internet, proxy), avisa; sem ela, o editor usa a Cascadia Code do Windows.
 
