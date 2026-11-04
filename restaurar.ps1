@@ -24,6 +24,37 @@ if ($null -eq (Get-Command code -ErrorAction SilentlyContinue)) {
     }
 }
 
+# ---- 1b. Fonte JetBrains Mono (instala so para o usuario atual, sem precisar de administrador) ----
+$pastaFontes = "$env:LOCALAPPDATA\Microsoft\Windows\Fonts"
+$regFontes = 'HKCU:\Software\Microsoft\Windows NT\CurrentVersion\Fonts'
+if (Get-ChildItem $pastaFontes -Filter 'JetBrainsMono*.ttf' -ErrorAction SilentlyContinue) {
+    Write-Host 'Fonte JetBrains Mono ja instalada.'
+} else {
+    $versao = '2.304'
+    $url = "https://github.com/JetBrains/JetBrainsMono/releases/download/v$versao/JetBrainsMono-$versao.zip"
+    $tmp = Join-Path $env:TEMP "jbmono-$([guid]::NewGuid())"
+    try {
+        New-Item -ItemType Directory -Force $tmp | Out-Null
+        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+        Write-Host "Baixando JetBrains Mono $versao..."
+        Invoke-WebRequest -Uri $url -OutFile "$tmp\fonte.zip" -UseBasicParsing
+        Expand-Archive "$tmp\fonte.zip" -DestinationPath "$tmp\x" -Force
+        if (-not (Test-Path $pastaFontes)) { New-Item -ItemType Directory -Force $pastaFontes | Out-Null }
+        if (-not (Test-Path $regFontes)) { New-Item -Force $regFontes | Out-Null }
+        Get-ChildItem "$tmp\x\fonts\ttf" -Filter '*.ttf' | ForEach-Object {
+            Copy-Item $_.FullName (Join-Path $pastaFontes $_.Name) -Force
+            New-ItemProperty -Path $regFontes -Name "$($_.BaseName) (TrueType)" `
+                -Value (Join-Path $pastaFontes $_.Name) -PropertyType String -Force | Out-Null
+        }
+        Write-Host 'OK  Fonte JetBrains Mono instalada (reinicie o VS Code para aparecer).'
+    } catch {
+        Write-Host "AVISO: nao consegui instalar a fonte ($($_.Exception.Message))."
+        Write-Host '       Baixe em https://www.jetbrains.com/lp/mono/ e instale os .ttf de fonts/ttf. Sem ela, o editor usa a Cascadia Code.'
+    } finally {
+        Remove-Item $tmp -Recurse -Force -ErrorAction SilentlyContinue
+    }
+}
+
 # ---- 2. Arquivos copiados como estao ----
 $copias = @(
     @{ de = 'vscode\keybindings.json';     para = "$env:APPDATA\Code\User\keybindings.json" },

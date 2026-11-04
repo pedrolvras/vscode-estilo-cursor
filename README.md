@@ -26,7 +26,7 @@ Lista em `extensoes-necessarias.txt`; o `restaurar.ps1` instala sozinho.
 
 `extensoes-todas.txt` tem todas as extensões instaladas hoje (SQL Server, Python, SQLite etc.), para quem quiser o mesmo ambiente completo.
 
-Fonte opcional: JetBrains Mono (sem ela, usa a Cascadia Code do Windows).
+Fonte: JetBrains Mono. O `restaurar.ps1` baixa e instala só para o usuário atual (sem administrador). Se não conseguir (sem internet, proxy), avisa; sem ela, o editor usa a Cascadia Code do Windows.
 
 ## Restaurar
 
@@ -35,7 +35,16 @@ powershell -ExecutionPolicy Bypass -File .\restaurar.ps1          # só as exten
 powershell -ExecutionPolicy Bypass -File .\restaurar.ps1 -Todas   # todas as extensões
 ```
 
-O script instala as extensões, guarda uma cópia `.bak` de cada arquivo que já existe antes de sobrescrever e copia as configurações. Depois, no VS Code: `Ctrl+Shift+P` → **Enable Custom CSS and JS** e reinicie.
+O script, nesta ordem:
+
+1. Instala as extensões. Se o comando `code` não estiver no PATH, avisa como resolver e segue.
+2. Instala a fonte JetBrains Mono, se ainda não estiver instalada.
+3. Copia `keybindings.json` e os arquivos de `vscode/` para `%USERPROFILE%\.vscode\`.
+4. Copia o `settings.json` do VS Code trocando o caminho do CSS (`file:///C:/Users/<usuário>/.vscode/...`) pela pasta do usuário atual.
+5. No `%USERPROFILE%\.claude\settings.json`, só acrescenta `DISABLE_TELEMETRY` e `DISABLE_ERROR_REPORTING` no `env`, mantendo o resto. O `claude/settings.json` deste repositório não é copiado inteiro: ele tem hooks do Orca e plugins desta máquina, que falhariam num computador sem eles. Fica aqui só para consulta.
+6. Aplica o CSS do chat do Claude Code.
+
+Antes de sobrescrever qualquer arquivo, guarda uma cópia `.bak`. Depois, no VS Code: `Ctrl+Shift+P` → **Enable Custom CSS and JS** e reinicie.
 
 ## Depois de atualizar
 
@@ -44,4 +53,7 @@ O script instala as extensões, guarda uma cópia `.bak` de cada arquivo que já
 
 ## Não fica aqui
 
-Os ícones escondidos na barra de atividades e a posição dos painéis ficam na memória interna do VS Code. Para guardar isso também, use o Settings Sync (engrenagem → Backup and Sync Settings…).
+Os ícones escondidos na barra de atividades e a posição dos painéis (por exemplo, o Claude Code na barra da direita) ficam na memória interna do VS Code, não em arquivo de configuração. Para levar isso também:
+
+- **Settings Sync:** engrenagem → **Backup and Sync Settings…**, com conta Microsoft ou GitHub; ou
+- **Refazer à mão:** botão direito na barra de ícones do topo da lateral → desmarcar os que não usa; arrastar o ícone do Claude Code para a barra da direita.
