@@ -232,3 +232,8 @@
 .monaco-workbench .part.titlebar .window-appicon {
   filter: grayscale(1) brightness(1.5) !important;
 }
+
+/* Ícone do Claude Code no topo do editor: branco como os outros botões (era laranja) */
+.monaco-workbench .editor-actions .action-label[aria-label^="Claude Code"] {
+  filter: brightness(0) invert(0.85) !important;
+}
