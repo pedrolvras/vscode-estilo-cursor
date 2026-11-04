@@ -15,20 +15,27 @@ Configurações para deixar o VS Code com layout, visual e atalhos parecidos com
 
 ## Extensões necessárias
 
-- `be5invis.vscode-custom-css` (Custom CSS and JS Loader)
-- `anthropic.claude-code` (Claude Code)
-- Tema `cursor-less-dark`
-- `miguelsolorio.symbols` (ícones)
+Lista em `extensoes-necessarias.txt`; o `restaurar.ps1` instala sozinho.
+
+| Extensão | Para quê |
+|---|---|
+| `be5invis.vscode-custom-css` | Custom CSS and JS Loader: carrega o `cursor-like.css` |
+| `anthropic.claude-code` | Claude Code (o chat) |
+| `cedricverlinden.cursor-dark` | Tema de cores `cursor-less-dark` |
+| `miguelsolorio.symbols` | Tema de ícones discreto "Symbols" |
+
+`extensoes-todas.txt` tem todas as extensões instaladas hoje (SQL Server, Python, SQLite etc.), para quem quiser o mesmo ambiente completo.
 
 Fonte opcional: JetBrains Mono (sem ela, usa a Cascadia Code do Windows).
 
 ## Restaurar
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\restaurar.ps1
+powershell -ExecutionPolicy Bypass -File .\restaurar.ps1          # só as extensões necessárias
+powershell -ExecutionPolicy Bypass -File .\restaurar.ps1 -Todas   # todas as extensões
 ```
 
-O script guarda uma cópia `.bak` de cada arquivo que já existe antes de sobrescrever. Depois, no VS Code: `Ctrl+Shift+P` → **Enable Custom CSS and JS** e reinicie.
+O script instala as extensões, guarda uma cópia `.bak` de cada arquivo que já existe antes de sobrescrever e copia as configurações. Depois, no VS Code: `Ctrl+Shift+P` → **Enable Custom CSS and JS** e reinicie.
 
 ## Depois de atualizar
 

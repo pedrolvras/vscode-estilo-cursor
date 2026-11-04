@@ -1,0 +1,4 @@
+be5invis.vscode-custom-css
+anthropic.claude-code
+cedricverlinden.cursor-dark
+miguelsolorio.symbols

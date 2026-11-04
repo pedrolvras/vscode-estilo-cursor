@@ -1,8 +1,18 @@
 # Restaura as configuracoes deste repositorio nos lugares certos.
 # Uso:  powershell -ExecutionPolicy Bypass -File .\restaurar.ps1
 # Antes de sobrescrever, guarda uma copia do que existe com a extensao .bak
+# Com -Todas, instala tambem as outras extensoes que eu uso (extensoes-todas.txt)
+
+param([switch]$Todas)
 
 $aqui = Split-Path -Parent $MyInvocation.MyCommand.Path
+
+# Extensoes
+$lista = if ($Todas) { 'extensoes-todas.txt' } else { 'extensoes-necessarias.txt' }
+Get-Content (Join-Path $aqui $lista) | Where-Object { $_.Trim() -ne '' } | ForEach-Object {
+    Write-Host "Instalando $_"
+    code --install-extension $_ --force | Out-Null
+}
 
 $copias = @(
     @{ de = 'vscode\settings.json';        para = "$env:APPDATA\Code\User\settings.json" },
