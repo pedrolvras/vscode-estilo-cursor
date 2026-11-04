@@ -2,6 +2,28 @@
 
 Configurações para deixar o VS Code com layout, visual e atalhos parecidos com os do Cursor, mais o chat do Claude Code no mesmo estilo e a telemetria desligada.
 
+## Instalar com o Claude Code
+
+Só no Windows, com o VS Code normal (não o Insiders) e o Claude Code instalados. Abra o Claude Code em qualquer pasta e cole o prompt abaixo:
+
+```text
+Instale no meu VS Code as configurações do repositório https://github.com/pedrolvras/vscode-estilo-cursor.
+
+1. Clone o repositório em %USERPROFILE%\vscode-estilo-cursor e leia o README.md e o restaurar.ps1 inteiros antes de mudar qualquer coisa.
+2. Não rode o restaurar.ps1 do jeito que está: ele substitui meu settings.json e meu keybindings.json inteiros. Faça os passos dele um a um, assim:
+   a. Extensões: instale as de extensoes-necessarias.txt com `code --install-extension`. Se o comando `code` não existir, me diga como colocá-lo no PATH e siga com o resto.
+   b. Fonte: instale a JetBrains Mono como no bloco "1b" do restaurar.ps1 (só para o meu usuário, sem administrador). Se o download falhar, me avise e siga.
+   c. Copie cursor-like.css, cursor-chat.css e aplicar-chat-css.ps1 de vscode\ para %USERPROFILE%\.vscode\.
+   d. settings.json do VS Code (%APPDATA%\Code\User\settings.json): guarde uma cópia .bak e JUNTE as configurações de vscode\settings.json com as minhas, sem apagar as que já tenho. Em conflito, me mostre a lista e pergunte qual fica. No `vscode_custom_css.imports`, troque o caminho para a minha pasta de usuário (file:///C:/Users/<meu usuário>/.vscode/cursor-like.css).
+   e. keybindings.json (%APPDATA%\Code\User\keybindings.json): guarde uma cópia .bak e ACRESCENTE os atalhos de vscode\keybindings.json aos meus, sem apagar os que já tenho. Avise se algum atalho meu usar Ctrl+L ou Ctrl+I.
+   f. Claude Code (%USERPROFILE%\.claude\settings.json): guarde uma cópia .bak e só acrescente "DISABLE_TELEMETRY": "1" e "DISABLE_ERROR_REPORTING": "1" no "env", mantendo o resto. NÃO copie o claude\settings.json do repositório: ele é de outra máquina.
+   g. Rode %USERPROFILE%\.vscode\aplicar-chat-css.ps1 para aplicar o visual do chat.
+3. Confira que os JSON continuam válidos e me diga o que foi feito e o que ficou de fora.
+4. No fim, me liste o que eu preciso fazer à mão: Ctrl+Shift+P > "Enable Custom CSS and JS" e reiniciar o VS Code; esconder os ícones que não uso (botão direito na barra de ícones do topo da lateral); arrastar o ícone do Claude Code para a barra da direita.
+```
+
+O `restaurar.ps1` direto (seção "Restaurar") serve para restaurar na **mesma** máquina ou para quem não tem configurações próprias a preservar.
+
 ## O que tem aqui
 
 | Arquivo | Vai para | Para quê |
