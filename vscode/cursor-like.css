@@ -189,8 +189,8 @@
 }
 .monaco-workbench .pane-composite-part:not(.panel) > .header-or-footer .composite-bar .action-item .action-label,
 .monaco-workbench .pane-composite-part:not(.panel) > .title .composite-bar .action-item .action-label {
-  width: 30px !important;
-  height: 30px !important;
+  width: 34px !important;
+  height: 34px !important;
   border-radius: 6px !important;
 }
 /* Ícones nativos (explorador, busca, git, extensões...) */
@@ -198,13 +198,13 @@
 .monaco-workbench .pane-composite-part:not(.panel) > .title .composite-bar .action-item .action-label.codicon,
 .monaco-workbench .pane-composite-part:not(.panel) > .header-or-footer .composite-bar .action-item .action-label.codicon::before,
 .monaco-workbench .pane-composite-part:not(.panel) > .title .composite-bar .action-item .action-label.codicon::before {
-  font-size: 19px !important;
+  font-size: 22px !important;
 }
 /* Ícones de extensões (desenhados por máscara) */
 .monaco-workbench .pane-composite-part:not(.panel) > .header-or-footer .composite-bar .action-item .action-label.uri-icon,
 .monaco-workbench .pane-composite-part:not(.panel) > .title .composite-bar .action-item .action-label.uri-icon {
-  -webkit-mask-size: 19px !important;
-  mask-size: 19px !important;
+  -webkit-mask-size: 22px !important;
+  mask-size: 22px !important;
 }
 /* Item ativo: fundo arredondado em vez da linha embaixo */
 .monaco-workbench .pane-composite-part .composite-bar .action-item.checked .action-label {
