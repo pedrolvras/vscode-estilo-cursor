@@ -66,6 +66,8 @@
     "editor.renderLineHighlight": "all",
     "editor.guides.bracketPairs": "active",
     "editor.bracketPairColorization.enabled": false,
+    "editor.glyphMargin": false,
+    "editor.lineNumbersMinChars": 3,
     "editor.minimap.maxColumn": 60,
     "terminal.integrated.fontSize": 13,
     "window.menuBarVisibility": "classic",
