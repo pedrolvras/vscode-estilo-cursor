@@ -67,7 +67,6 @@
     "editor.guides.bracketPairs": "active",
     "editor.bracketPairColorization.enabled": false,
     "editor.minimap.maxColumn": 60,
-    "editor.minimap.renderCharacters": false,
     "terminal.integrated.fontSize": 13,
     "window.menuBarVisibility": "classic",
     "workbench.colorCustomizations": {
@@ -104,5 +103,6 @@
 
     // Explorador: só a cor no nome do arquivo alterado, sem as letras M/U
     "explorer.decorations.badges": false,
-    "workbench.activityBar.location": "top"
+    "workbench.activityBar.location": "top",
+    "editor.minimap.renderCharacters": false
 }
