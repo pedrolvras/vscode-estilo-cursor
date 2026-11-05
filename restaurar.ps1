@@ -59,6 +59,8 @@ if (Get-ChildItem $pastaFontes -Filter 'JetBrainsMono*.ttf' -ErrorAction Silentl
 $copias = @(
     @{ de = 'vscode\keybindings.json';     para = "$env:APPDATA\Code\User\keybindings.json" },
     @{ de = 'vscode\cursor-like.css';      para = "$env:USERPROFILE\.vscode\cursor-like.css" },
+    @{ de = 'vscode\fechar-menu.js';       para = "$env:USERPROFILE\.vscode\fechar-menu.js" },
+    @{ de = 'vscode\rodape-blame.js';      para = "$env:USERPROFILE\.vscode\rodape-blame.js" },
     @{ de = 'vscode\cursor-chat.css';      para = "$env:USERPROFILE\.vscode\cursor-chat.css" },
     @{ de = 'vscode\aplicar-chat-css.ps1'; para = "$env:USERPROFILE\.vscode\aplicar-chat-css.ps1" }
 )

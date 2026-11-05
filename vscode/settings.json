@@ -94,14 +94,17 @@
 
     // Custom CSS and JS Loader: cantos, respiro, abas em pílula (arquivo em C:\Users\pedro.assumpcao\.vscode\cursor-like.css)
     "vscode_custom_css.imports": [
-        "file:///C:/Users/pedro.assumpcao/.vscode/cursor-like.css"
+        "file:///C:/Users/pedro.assumpcao/.vscode/cursor-like.css",
+        "file:///C:/Users/pedro.assumpcao/.vscode/fechar-menu.js",
+        "file:///C:/Users/pedro.assumpcao/.vscode/rodape-blame.js"
     ],
     "workbench.iconTheme": "vscode-jetbrains-icon-theme-2023-dark",
 
-    // Fonte: usa a primeira que estiver instalada (JetBrains Mono > Geist Mono > Cascadia Code, que já vem no Windows)
-    "editor.fontFamily": "'JetBrains Mono', 'Geist Mono', 'Cascadia Code', Consolas, monospace",
+    // Fonte: editor e terminal na Cascadia (já vem no Windows)
+    "editor.fontFamily": "'Cascadia Code', Consolas, monospace",
     "editor.fontLigatures": false,
-    "terminal.integrated.fontFamily": "'JetBrains Mono', 'Geist Mono', 'Cascadia Mono', Consolas, monospace",
+    "terminal.integrated.fontFamily": "'Cascadia Mono', Consolas, monospace",
+    "chat.fontSize": 13.6,
 
     // Explorador: só a cor no nome do arquivo alterado, sem as letras M/U
     "explorer.decorations.badges": false,

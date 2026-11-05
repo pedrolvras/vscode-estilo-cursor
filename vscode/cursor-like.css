@@ -154,6 +154,53 @@
   background-color: #ffffff;
 }
 
+/* Linha no estilo do Cursor: nome e descrição à esquerda, controle à direita.
+   Só nos tipos simples (número, texto, lista de opções); listas e objetos ficam como estão. */
+.settings-editor .setting-item-number .setting-item-contents,
+.settings-editor .setting-item-text .setting-item-contents,
+.settings-editor .setting-item-enum .setting-item-contents {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 240px;
+  column-gap: 32px;
+  align-items: center;
+}
+.settings-editor .setting-item-number .setting-item-contents > *,
+.settings-editor .setting-item-text .setting-item-contents > *,
+.settings-editor .setting-item-enum .setting-item-contents > * {
+  grid-column: 1;
+}
+.settings-editor .setting-item-number .setting-item-contents > .setting-item-value,
+.settings-editor .setting-item-text .setting-item-contents > .setting-item-value,
+.settings-editor .setting-item-enum .setting-item-contents > .setting-item-value {
+  grid-column: 2;
+  grid-row: 1 / span 3;
+  width: 100% !important;
+  margin-top: 0 !important;
+}
+.settings-editor .setting-item-number .setting-item-value .monaco-inputbox,
+.settings-editor .setting-item-text .setting-item-value .monaco-inputbox,
+.settings-editor .setting-item-enum .setting-item-value .monaco-select-box,
+.settings-editor .setting-item-enum .setting-item-value .setting-value-select {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+/* Liga/desliga: a chave vai para a direita da descrição */
+.settings-editor .setting-item-bool .setting-item-value-description {
+  display: flex !important;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 32px;
+}
+.settings-editor .setting-item-bool .setting-value-checkbox {
+  margin-top: 2px !important;
+}
+/* Cartão com mais respiro dentro, como no Cursor */
+.settings-editor .settings-tree-container .setting-item-contents {
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+}
+
 /* ===== Canto direito da barra de título como no Cursor: painel, chat e engrenagem ===== */
 
 /* Esconde o botão da barra lateral esquerda, o de personalizar layout e o de contas */
@@ -236,4 +283,13 @@
 /* Ícone do Claude Code no topo do editor: branco como os outros botões (era laranja) */
 .monaco-workbench .editor-actions .action-label[aria-label^="Claude Code"] {
   filter: brightness(0) invert(0.85) !important;
+}
+
+/* Barra lateral direita (Claude Code): sem a linha do ícone no topo, o nome sobe para o lugar dele.
+   O conteúdo ganha a altura da linha escondida (o VS Code calcula a altura contando com ela). */
+.monaco-workbench .part.auxiliarybar > .header-or-footer.header {
+  display: none !important;
+}
+.monaco-workbench .part.auxiliarybar > .content {
+  height: calc(100% - 35px) !important;
 }
