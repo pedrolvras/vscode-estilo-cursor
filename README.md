@@ -48,7 +48,7 @@ Lista em `extensoes-necessarias.txt`; o `restaurar.ps1` instala sozinho.
 | `cedricverlinden.cursor-dark` | Tema de cores `cursor-less-dark` |
 | `chadalen.vscode-jetbrains-icon-theme` | Tema de ícones dos arquivos no estilo JetBrains (2023 dark) |
 
-`extensoes-todas.txt` tem, além dessas, as outras extensões que uso (contador de uso do Claude e visualizador de PDF).
+`extensoes-todas.txt` tem, além dessas, todas as outras que uso: contador de uso do Claude, ícones Symbols, PDF, SQL Server (mssql), SQLTools e SQLite, Python. As duas locais não estão no marketplace e ficam fora da lista: `local.copiar-arroba` (`opcional/copiar-arroba/`) e `local.scriptcase-php` (`opcional/php-sem-tag/`), instaladas pelo `README.md` de cada uma.
 
 Fonte: JetBrains Mono. O `restaurar.ps1` baixa e instala só para o usuário atual (sem administrador). Se não conseguir (sem internet, proxy), avisa; sem ela, o editor usa a Cascadia Code do Windows.
 
