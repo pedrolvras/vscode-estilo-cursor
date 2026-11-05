@@ -13,8 +13,8 @@ Instale no meu VS Code as configurações do repositório https://github.com/ped
 2. Não rode o restaurar.ps1 do jeito que está: ele substitui meu settings.json e meu keybindings.json inteiros. Faça os passos dele um a um, assim:
    a. Extensões: instale as de extensoes-necessarias.txt com `code --install-extension`. Se o comando `code` não existir, me diga como colocá-lo no PATH e siga com o resto.
    b. Fonte: instale a JetBrains Mono como no bloco "1b" do restaurar.ps1 (só para o meu usuário, sem administrador). Se o download falhar, me avise e siga.
-   c. Copie cursor-like.css, cursor-chat.css e aplicar-chat-css.ps1 de vscode\ para %USERPROFILE%\.vscode\.
-   d. settings.json do VS Code (%APPDATA%\Code\User\settings.json): guarde uma cópia .bak e JUNTE as configurações de vscode\settings.json com as minhas, sem apagar as que já tenho. Em conflito, me mostre a lista e pergunte qual fica. No `vscode_custom_css.imports`, troque o caminho para a minha pasta de usuário (file:///C:/Users/<meu usuário>/.vscode/cursor-like.css).
+   c. Copie cursor-like.css, fechar-menu.js, rodape-blame.js, cursor-chat.css e aplicar-chat-css.ps1 de vscode\ para %USERPROFILE%\.vscode\.
+   d. settings.json do VS Code (%APPDATA%\Code\User\settings.json): guarde uma cópia .bak e JUNTE as configurações de vscode\settings.json com as minhas, sem apagar as que já tenho. Em conflito, me mostre a lista e pergunte qual fica. No `vscode_custom_css.imports`, troque o caminho para a minha pasta de usuário (file:///C:/Users/<meu usuário>/.vscode/..., nas três linhas).
    e. keybindings.json (%APPDATA%\Code\User\keybindings.json): guarde uma cópia .bak e ACRESCENTE os atalhos de vscode\keybindings.json aos meus, sem apagar os que já tenho. Avise se algum atalho meu usar Ctrl+L ou Ctrl+I.
    f. Claude Code (%USERPROFILE%\.claude\settings.json): guarde uma cópia .bak e só acrescente "DISABLE_TELEMETRY": "1" e "DISABLE_ERROR_REPORTING": "1" no "env", mantendo o resto. NÃO copie o claude\settings.json do repositório: ele é de outra máquina.
    g. Rode %USERPROFILE%\.vscode\aplicar-chat-css.ps1 para aplicar o visual do chat.
@@ -31,6 +31,8 @@ O `restaurar.ps1` direto (seção "Restaurar") serve para restaurar na **mesma**
 | `vscode/settings.json` | `%APPDATA%\Code\User\` | Layout, tema, fonte, cores dos menus, telemetria desligada, atualização manual, salvar sozinho |
 | `vscode/keybindings.json` | `%APPDATA%\Code\User\` | `Ctrl+L` abre o chat do Claude; `Ctrl+I` manda a seleção para o chat |
 | `vscode/cursor-like.css` | `%USERPROFILE%\.vscode\` | Visual da janela (linhas finas, abas, menus, tela de configurações, ícones), carregado pelo Custom CSS and JS Loader |
+| `vscode/fechar-menu.js` | `%USERPROFILE%\.vscode\` | Menu do topo (compacto) fecha sozinho quando o mouse sai |
+| `vscode/rodape-blame.js` | `%USERPROFILE%\.vscode\` | Leva o autor da linha (git blame) para o lado esquerdo do rodapé |
 | `vscode/cursor-chat.css` | `%USERPROFILE%\.vscode\` | Visual do chat do Claude Code (cartão da mensagem, caixa de digitar, botões) |
 | `vscode/aplicar-chat-css.ps1` | `%USERPROFILE%\.vscode\` | Aplica o `cursor-chat.css` na extensão do Claude Code (`-Remover` desfaz) |
 | `claude/settings.json` | `%USERPROFILE%\.claude\` | Configuração do Claude Code, com telemetria e relatório de erros desligados |
