@@ -1,26 +1,62 @@
 # Restaura as configuracoes deste repositorio nos lugares certos.
 # Uso:  powershell -ExecutionPolicy Bypass -File .\restaurar.ps1
-#       powershell -ExecutionPolicy Bypass -File .\restaurar.ps1 -Todas   (instala todas as extensoes)
-# Antes de sobrescrever, guarda uma copia do que existe com a extensao .bak
+#       powershell -ExecutionPolicy Bypass -File .\restaurar.ps1 -Todas   (identico a maquina de origem:
+#           todas as extensoes, as duas extensoes locais de opcional\ e o icone cinza)
+#       -SemAtualizar   pula a conferencia de que o repositorio esta em dia com o GitHub
+# Antes de sobrescrever, guarda uma copia do que existe com a extensao .bak-<data-hora> (nunca apaga as antigas)
 
-param([switch]$Todas)
+param([switch]$Todas, [switch]$SemAtualizar)
 
 $aqui = Split-Path -Parent $MyInvocation.MyCommand.Path
 $utf8 = New-Object System.Text.UTF8Encoding($false)
+$carimbo = Get-Date -Format 'yyyyMMdd-HHmmss'
 
 function Guardar-Bak($caminho) {
-    if (Test-Path $caminho) { Copy-Item $caminho "$caminho.bak" -Force }
+    if (Test-Path $caminho) { Copy-Item $caminho "$caminho.bak-$carimbo" -Force }
 }
 
-# ---- 1. Extensoes (precisa do comando "code" no PATH) ----
+# ---- 0. Repositorio em dia com o GitHub (aplicar uma copia velha deixa a maquina diferente da origem) ----
+if (-not $SemAtualizar -and (Test-Path (Join-Path $aqui '.git')) -and (Get-Command git -ErrorAction SilentlyContinue)) {
+    git -C $aqui fetch --quiet 2>$null
+    if ($LASTEXITCODE -eq 0) {
+        $atras  = [int](git -C $aqui rev-list --count 'HEAD..@{u}' 2>$null)
+        $frente = [int](git -C $aqui rev-list --count '@{u}..HEAD' 2>$null)
+        if ($atras -gt 0) {
+            Write-Host "PAREI: o repositorio esta $atras commit(s) atras do GitHub. Rode 'git pull' aqui e depois este script de novo."
+            Write-Host '       (ou use -SemAtualizar para aplicar a versao local mesmo assim)'
+            exit 1
+        }
+        if ($frente -gt 0) {
+            Write-Host "AVISO: ha $frente commit(s) locais que nao estao no GitHub. Se forem mudancas desta maquina, faca 'git push' para a outra maquina receber."
+        }
+    } else {
+        Write-Host 'AVISO: nao consegui consultar o GitHub (sem internet?). Aplicando a versao local.'
+    }
+}
+
+# ---- 1. Extensoes (precisa do comando "code") ----
+# Se "code" nao estiver no PATH, usa o da instalacao padrao do VS Code (vale tambem para os scripts chamados abaixo)
 if ($null -eq (Get-Command code -ErrorAction SilentlyContinue)) {
+    $binCode = Join-Path $env:LOCALAPPDATA 'Programs\Microsoft VS Code\bin'
+    if (Test-Path (Join-Path $binCode 'code.cmd')) { $env:PATH = "$binCode;$env:PATH" }
+}
+$temCode = $null -ne (Get-Command code -ErrorAction SilentlyContinue)
+if (-not $temCode) {
     Write-Host 'AVISO: comando "code" nao encontrado. Extensoes nao instaladas.'
     Write-Host '       No VS Code: Ctrl+Shift+P > "Shell Command: Install code command in PATH", ou reinstale marcando "Add to PATH".'
 } else {
     $lista = if ($Todas) { 'extensoes-todas.txt' } else { 'extensoes-necessarias.txt' }
     Get-Content (Join-Path $aqui $lista) | Where-Object { $_.Trim() -ne '' } | ForEach-Object {
         Write-Host "Instalando $_"
-        code --install-extension $_.Trim() --force | Out-Null
+        code --install-extension $_.Trim() --force 2>$null | Out-Null
+    }
+    # Extensoes locais (fora do marketplace): so com -Todas
+    if ($Todas) {
+        foreach ($local in 'copiar-arroba', 'php-sem-tag') {
+            Write-Host "Instalando extensao local $local"
+            try { & powershell -NoProfile -ExecutionPolicy Bypass -File (Join-Path $aqui "opcional\$local\instalar.ps1") 2>$null | Out-Null }
+            catch { Write-Host "AVISO: falhou a extensao local $local ($($_.Exception.Message))." }
+        }
     }
 }
 
@@ -107,5 +143,23 @@ if (Get-ChildItem "$env:USERPROFILE\.vscode\extensions" -Directory -Filter 'anth
     Write-Host 'AVISO: extensao do Claude Code nao encontrada; rode aplicar-chat-css.ps1 depois de instalar.'
 }
 
+# ---- 6. Icone cinza nos atalhos: so com -Todas ----
+if ($Todas) {
+    try { & (Join-Path $aqui 'icone\icone-cinza.ps1') }
+    catch { Write-Host "AVISO: nao consegui trocar o icone ($($_.Exception.Message))." }
+}
+
+# ---- 7. Conferencia: extensoes que deveriam estar instaladas e nao estao ----
+if ($temCode) {
+    $esperadas = @(Get-Content (Join-Path $aqui $(if ($Todas) { 'extensoes-todas.txt' } else { 'extensoes-necessarias.txt' })) |
+        ForEach-Object { $_.Trim().ToLower() } | Where-Object { $_ -ne '' })
+    if ($Todas) { $esperadas += 'local.copiar-arroba', 'local.scriptcase-php' }
+    $instaladas = @(code --list-extensions 2>$null | ForEach-Object { $_.Trim().ToLower() })
+    $faltando = @($esperadas | Where-Object { $instaladas -notcontains $_ })
+    if ($faltando.Count -gt 0) { Write-Host "AVISO: extensoes que nao instalaram: $($faltando -join ', ')" }
+    else { Write-Host "OK  $($esperadas.Count) extensoes conferidas." }
+}
+
 Write-Host ''
-Write-Host 'Falta no VS Code: Ctrl+Shift+P > Enable Custom CSS and JS, e reiniciar.'
+Write-Host 'Falta no VS Code: Ctrl+Shift+P > Enable Custom CSS and JS (ou Reload Custom CSS and JS), e fechar e abrir.'
+Write-Host 'A mao (nao fica em arquivo): arrastar o icone do Claude Code para a barra da direita e esconder os icones que nao usa.'
